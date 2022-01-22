@@ -124,6 +124,7 @@ c
 # Just for kicks, here we use Pluto's feature for embedding videos to point you to a short video on YouTube on using NumPy arrays.
 
 
+## TODO
 #from IPython.display import YouTubeVideo
 # a short video about using NumPy arrays, from Enthought
 #YouTubeVideo('vWkb7VahaXQ')
