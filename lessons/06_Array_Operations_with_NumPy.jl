@@ -49,8 +49,8 @@ c = 1
 σ = 0.2
 Δt = σ * Δx
 
-x = range(start = 0, stop = 2, length = nₓ)
-y = range(start = 0, stop = 2, length = ny)
+rangex = range(start = 0, stop = 2, length = nₓ)
+rangey = range(start = 0, stop = 2, length = ny)
 
 ### TODO
 u = ones(ny, nₓ) ##create a 1xn vector of 1's
@@ -59,8 +59,8 @@ uₙ = ones(ny, nₓ)
 ###Assign initial conditions
 #We can try the following to start the initial conditions:
 # TODO - cartesian indexes
-rangey = (.5/Δy):(1/Δy)
-rangex = (.5/Δx):(1/Δx)
+rangey = Int(.5/Δy):Int(1/Δy)
+rangex = Int(.5/Δx):Int(1/Δx)
 for (_, j) in rangey
     for (_, i) in rangex
         u[i, j] = 2.0
