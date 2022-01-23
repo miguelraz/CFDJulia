@@ -158,10 +158,10 @@ function time1(u, params)
                                   (uₙ[2:end, 2:end] - uₙ[2:end, 1:end])) -
                                   (c * Δt / Δy *
                                    (uₙ[2:end, 2:end] - uₙ[1:end, 2:end])))
-            @views u[1, :] = 1.0
-            @views u[end, :] = 1.0
-            @views u[:, 1] = 1.0
-            @views u[:, end] = 1.0
+            @views u[1, :] .= 1.0
+            @views u[end, :] .= 1.0
+            @views u[:, 1] .= 1.0
+            @views u[:, end] .= 1.0
         end
     end
     end
