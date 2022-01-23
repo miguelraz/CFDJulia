@@ -46,8 +46,8 @@ rangex = range(start = 0, stop = 2, length = nₓ)
 rangey = range(start = 0, stop = 2, length = ny)
 indices = CartesianIndices((rangex, rangey))
 
-uₙ = ones(ny, nₓ) ##create a 1xn vector of 1's
-u  = ones(ny, nₓ)
+u = ones(ny, nₓ) ##create a 1xn vector of 1's
+uₙ = similar(u)
 
 # ## Assign initial conditions
 ##set hat function I.C. : u(.5<=x<=1 && .5<=y<=1 ) is 2
@@ -86,9 +86,10 @@ function diffuse(nt)
     rangey = range(start = 0, stop = 2, length = ny)
     indices = CartesianIndices((rangex, rangey))
     u[indices] = 2.0
+    un = similar(u)
 
     for n in 1:nt
-        un = copy(n)
+        copyto!(un, u)
         # TODO check indexing
         u[2:end, 2:end] = (un[2:end,2:end] +
                         nu * Δt / Δx^2 *

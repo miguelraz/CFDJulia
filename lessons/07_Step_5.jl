@@ -151,9 +151,10 @@ surf = ax.plot_surface(X, Y, u[:], cmap=cm.viridis)
 # TODO
 u = ones((ny, nx))
 # u[int(.5 / dy):int(1 / dy + 1), int(.5 / dx):int(1 / dx + 1)] = 2
+uₙ = similar(u)
 
 for n in 1:nₜ ##loop across number of time steps
-    uₙ = copy(u)
+    copyto!(uₙ, u)
     row, col = size(u)
     # TODO C vs FORTRAN order
     for j in 2:row
@@ -185,9 +186,10 @@ surf2 = ax.plot_surface(X, Y, u[:], cmap=cm.viridis)
 # TODO timing
 u = ones((ny, nx))
 u[CartesianIndices((rangex, rangey))] .= 2
+uₙ = similar(u)
 
 for n in 1:nₜ ##loop across number of time steps
-    uₙ = copy(u)
+    copyto!(uₙ, u)
     u[2:end, 2:end] = @views (uₙ[2:end, 2:end] - (c * Δt / Δx * (uₙ[2:end, 2:end] - uₙ[2:end, begin:(end-1)])) -
                               (c * Δt / Δy * (uₙ[2:end, 2:end] - uₙ[begin:(end-1), 2:end])))
     u[begin, :] .= 1.0

@@ -89,13 +89,14 @@ ax.plot_surface(X, Y, u, cmap=cm.viridis, rstride=2, cstride=2)
 ax.set_xlabel('$x$')
 ax.set_ylabel('$y$');
 
-
+un = similar(u)
+vn = similar(v)
 
 # TODO BIKESHED Syntax
 # Possible OffsetArrays.jl example?
 for n in  1:nₜ
-    un = copy(u)
-    vn = copy(v)
+    copyto!(un, u)
+    copyto!(vn, v)
     @views u[begin+1:end, begin+1:end] = (un[begin+1:end, begin+1:end] -
                  (un[begin+1:end, begin+1:end] * c * Δt / Δx * (un[begin+1:end, begin+1:end] - un[begin+1:end, begin:end-1])) -
                   vn[begin+1:end, begin+1:end] * c * Δt / Δy * (un[begin+1:end, begin+1:end] - un[:-1, begin+1:end]))
