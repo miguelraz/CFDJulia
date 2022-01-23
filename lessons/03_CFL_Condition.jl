@@ -37,10 +37,10 @@ function  linearconv(nₓ)
     u = ones(nₓ)      #defining a numpy array which is nx elements long with every value equal to 1.
     u[Int.((.5/dx):(1 / dx))] .= 2.0  #setting u = 2 between 0.5 and 1 as per our I.C.s
 
-    uₙ = ones(nₓ) #initializing our placeholder array, un, to hold the values we calculate for the n+1 timestep
+    uₙ = similar(u) #initializing our placeholder array, un, to hold the values we calculate for the n+1 timestep
 
     for n in nₜ #iterate through time
-        uₙ = copy(n) ##copy the existing values of u into un
+        copyto!(uₙ, u) ##copy the existing values of u into un
         for i in 1:nₓ
             u[i] = uₙ[i] - c * dt / dx * (uₙ[i] - uₙ[i-1])
         end
@@ -106,10 +106,10 @@ function linearconv(nₓ)
     u = ones(nx)
     u[indexes] .= 2
 
-    un = ones(nx)
+    un = similar(u)
 
     for n in range(nₜ):  #iterate through time
-        uₙ = copy(u) ##copy the existing values of u into un
+        copyto!(uₙ, u) ##copy the existing values of u into un
         for i in 1:nₓ
             u[i] = uₙ[i] - c * dt / dx * (uₙ[i] - uₙ[i-1])
         end
