@@ -1,9 +1,12 @@
+# WIP - This repo is incomplete and needs a brave contributor like you!
+
+> Please see the issues to see how you can contribute.
 
 # CFD Julia
 
 > Please cite as: Barba, Lorena A., and Forsyth, Gilbert F. (2018). CFD Python: the 12 steps to Navier-Stokes equations. _Journal of Open Source Education_, **1**(9), 21, https://doi.org/10.21105/jose.00021
 
-[![DOI](https://jose.theoj.org/papers/10.21105/jose.00021/status.svg)](https://doi.org/10.21105/jose.00021)
+# [![DOI](https://jose.theoj.org/papers/10.21105/jose.00021/status.svg)](https://doi.org/10.21105/jose.00021)
 
 **CFD Python**, a.k.a. the **12 steps to Navier-Stokes**, is a practical module for learning the foundations of Computational Fluid Dynamics (CFD) by coding solutions to the basic partial differential equations that describe the physics of fluid flow.
 
@@ -30,42 +33,30 @@ Lessons
 -------
 Steps 1–4 are in one spatial dimension. Steps 5–10 are in two dimensions (2D). Steps 11–12 solve the Navier-Stokes equation in 2D. Three "bonus" notebooks cover the CFL condition for numerical stability, array operations with NumPy, and defining functions in Python.
 
-* [Quick Julia Intro]()
-—For Python novices, this lesson introduces the numerical libraries (NumPy and Matplotlib), Python variables, use of whitespace, and slicing arrays.
-* [Step 1]()
-—Linear convection with a step-function initial condition (IC) and appropriate boundary conditions (BCs).
-* [Step 2]()
-—With the same IC/BCs, _nonlinear_ convection.
-* [CFL Condition]()
-—Exploring numerical stability and the Courant-Friedrichs-Lewy (CFL) condition.
-* [Step 3]()
-—With the same IC/BCs, _diffusion_ only.
-* [Step 4]()
-—Burgers’ equation, with a saw-tooth IC and periodic BCs (with an introduction to Sympy).
+> FIX numerical libraries
+> FIX links
+* [Quick Julia Intro]() — For Python novices, this lesson introduces the numerical libraries (NumPy and Matplotlib), Python variables, use of whitespace, and slicing arrays.
+* [Step 1]() — Linear convection with a step-function initial condition (IC) and appropriate boundary conditions (BCs).
+* [Step 2]() — With the same IC/BCs, _nonlinear_ convection.
+* [CFL Condition]() — Exploring numerical stability and the Courant-Friedrichs-Lewy (CFL) condition.
+* [Step 3]() — With the same IC/BCs, _diffusion_ only.
+* [Step 4]() — Burgers’ equation, with a saw-tooth IC and periodic BCs (with an introduction to Sympy).
 * [Array Operations with Julia]()
-* [Step 5]()
-—Linear convection in 2D with a square-function IC and appropriate BCs.
-* [Step 6]()
-—With the same IC/BCs, _nonlinear_ convection in 2D.
-* [Step 7]()
-—With the same IC/BCs, _diffusion_ in 2D.
-* [Step 8]()
-—Burgers’ equation in 2D
-* [Defining Functions in Python]()
-* [Step 9]()
-—Laplace equation with zero IC and both Neumann and Dirichlet BCs.
-* [Step 10]()
-—Poisson equation in 2D.
-* [Step 11]()
-—Solves the Navier-Stokes equation for 2D cavity flow.
-* [Step 12]()
-—Solves the Navier-Stokes equation for 2D channel flow.
-
+* [Step 5]() — Linear convection in 2D with a square-function IC and appropriate BCs.
+* [Step 6]() — With the same IC/BCs, _nonlinear_ convection in 2D.
+* [Step 7]() — With the same IC/BCs, _diffusion_ in 2D.
+* [Step 8]() — Burgers’ equation in 2D
+* [Defining Functions in Julia]() - How to define functions in Julia.
+* [Step 9]() — Laplace equation with zero IC and both Neumann and Dirichlet BCs.
+* [Step 10]() — Poisson equation in 2D.
+* [Step 11]() — Solves the Navier-Stokes equation for 2D cavity flow.
+* [Step 12]() — Solves the Navier-Stokes equation for 2D channel flow.
 
 
 
 ## Dependencies
 
+#### TODO Fix dependencies
 To use these lessons, you need Python 3, and the standard stack of scientific Python: NumPy, Matplotlib, SciPy, Sympy. And of course, you need [Jupyter](http://jupyter.org)—an interactive computational environment that runs on a web browser.
 To use these lessons, you need Julia 1.6 or above and all the packages you need can be installed by typing
 > ] instantiate .
