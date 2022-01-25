@@ -112,10 +112,10 @@ pyplot.plot(range(start = 0, stop = 2, length = nx), u);
 # so we'll start by nesting one loop inside the other. Note the use of the nifty `enumerate` function.
 # When we write: `for i in nx` we will iterate through the `u` array.
 
-un = ones(nx) #initialize a temporary array
+un = similar(u) #initialize a temporary array like u of the same type and size
 
 for n in nt  #loop for values of n from 0 to nt, so it will run nt times
-    un = copy(u) ##copy the existing values of u into un
+    copyto!(un, u) ##copy the existing values of u into un
     for (elem, i) in enumerate(nx)
     # for i in 1:length(nx) # Try commenting the previous line and uncommenting this one to see what happens!
         u[i] = un[i] - c * dt / dx * (un[i] - un[i-1])

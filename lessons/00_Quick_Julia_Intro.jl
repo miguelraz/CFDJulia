@@ -116,7 +116,13 @@ a[2] = 3
 a
 c
 
-# OK, it worked!  If the difference between `a = b` and `a = b.copy()` is unclear, you should read through this again.  This issue will come back to haunt you otherwise.
+# OK, it worked!  If the difference between `a = b` and `a = copy(b)` is unclear, you should read through this again.  This issue will come back to haunt you otherwise.
+
+# Every time we `copy` we create a brand new matrix and have to allocate new memory. Allocating new memory is expensive, especially if we do it repeatedly.
+# To reuse the existing memory we allocated for `c` when copying `a`, we can use `copyto!`.
+# The exclamation mark indicates we are changing one of the arguments, `c` in this case.
+
+copyto!(c, a)
 
 ## Learn More
 

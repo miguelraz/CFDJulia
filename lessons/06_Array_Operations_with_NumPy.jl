@@ -54,7 +54,7 @@ rangey = range(start = 0, stop = 2, length = ny)
 
 ### TODO
 u = ones(ny, nₓ) ##create a 1xn vector of 1's
-uₙ = ones(ny, nₓ)
+uₙ = similar(u)
 
 ###Assign initial conditions
 #We can try the following to start the initial conditions:
@@ -92,7 +92,7 @@ using BenchmarkTools
 
 @btime begin
     for n in 1:nₜ ##loop across number of time steps
-    uₙ = copy(u)
+    copyto!(uₙ, u)
     row, col = size(u)
     for j in 1:row
         for i in 1:col
@@ -150,10 +150,11 @@ end :setup=(u = ones(ny, nx))
 #
 function time1(u, params)
     u = ones(ny, nₓ)
+    uₙ = similar(u)
     (;Δt, Δx, c, nₜ) = params
 
     for n in 1:nₜ ##loop across number of time steps
-    uₙ = copy(u)
+    copyto!(uₙ, u)
             @views u[:,:] .= (uₙ[2:end, 2:end] - (c * Δt / Δx *
                                   (uₙ[2:end, 2:end] - uₙ[2:end, 1:end])) -
                                   (c * Δt / Δy *

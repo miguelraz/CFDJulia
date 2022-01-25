@@ -99,10 +99,13 @@ ax.plot_surface(X, Y, v[:], cmap=cm.viridis, rstride=1, cstride=1)
 ax.set_xlabel('$x$')
 ax.set_ylabel('$y$');
 
+un = similar(u)
+vn = similar(v)
+
 # TODO fix variable names, make as function
 for n in 1:nₜ
-    un = u.copy()
-    vn = v.copy()
+    copyto!(un, u)
+    copyto!(vn, v)
 
     u[2:end, 2:end] = @views (un[2:end, 2:end] -
                      dt / dx * un[2:end, 2:end] *
