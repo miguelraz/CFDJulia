@@ -64,7 +64,7 @@ c = 1
 
 rangex = range(start = 0, stop = 2, length = nₓ)
 rangey = range(start = 0, stop = 2, length = ny)
-indices = CartesianIndices((rangex, rangey))
+indices = CartesianIndices((nₓ, ny))
 
 uₙ = ones(ny, nₓ) ##create a 1xn vector of 1's
 vₙ = ones(ny, nₓ)
@@ -89,19 +89,39 @@ ax.plot_surface(X, Y, u, cmap=cm.viridis, rstride=2, cstride=2)
 ax.set_xlabel('$x$')
 ax.set_ylabel('$y$');
 
+un = similar(u)
+vn = similar(v)
 
+# Create convenient aliases of submatrices of u, v, un, vn
+@views begin
+    u_yx  =  u[begin+1:end, begin+1:end]
+    v_yx  =  v[begin+1:end, begin+1:end]
+
+    un_yx = un[begin+1:end, begin+1:end]
+    vn_yx = un[begin+1:end, begin+1:end]
+
+    un_y =  un[begin+1:end, :          ]
+    un_x =  un[:          , begin+1:end]
+
+    vn_y =  vn[begin+1:end, :          ]
+    vn_x =  vn[:          , begin+1:end]
+end
 
 # TODO BIKESHED Syntax
 # Possible OffsetArrays.jl example?
 for n in  1:nₜ
-    un = copy(u)
-    vn = copy(v)
-    @views u[begin+1:end, begin+1:end] = (un[begin+1:end, begin+1:end] -
-                 (un[begin+1:end, begin+1:end] * c * Δt / Δx * (un[begin+1:end, begin+1:end] - un[begin+1:end, begin:end-1])) -
-                  vn[begin+1:end, begin+1:end] * c * Δt / Δy * (un[begin+1:end, begin+1:end] - un[:-1, begin+1:end]))
-    @views v[begin+1:end, begin+1:end] = (vn[begin+1):end, begin+1:end] -
-                 (un[begin+1:end, begin+1:end] * c * Δt / Δx * (vn[begin+1:end, begin+1:end] - vn[begin+1:end, begin:end-1])) -
-                  vn[begin+1:end, begin+1:end] * c * Δt / Δy * (vn[begin+1:end, begin+1:end] - vn[begin:end-1, begin+1:end]))
+    copyto!(un, u)
+    copyto!(vn, v)
+    # diff(un_y, dims=2) == un_y[:, begin+1:end] - un_y[:, begin:end-1]
+    #                    == un[begin+1:end, begin+1:end] - un[begin+1:end, begin:end-1]
+    # diff(un_x, dims=1) == un_x[begin+1:end, :] - un_x[begin:end-1, :]
+    #                    == un[begin+1:end, begin+1:end] - un[begin:end-1, begin+1:end]
+    u_yx = un_yx .-
+              un_yx .* c .* Δt ./ Δx .* diff(un_y, dims=2) -
+              vn_yx .* c .* Δt ./ Δy .* diff(un_x, dims=1)
+    v_yx = vn_yx .-
+              un_yx .* c .* Δt ./ Δx .* diff(vn_y, dims=2) -
+              vn_yx .* c .* Δt ./ Δy .* diff(vn_x, dims=1)
     
     u[begin, :] = 1
     u[end, :] = 1

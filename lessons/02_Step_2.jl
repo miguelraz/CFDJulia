@@ -56,14 +56,14 @@ for i in length((.5/Δx):(1/Δx))
       u[i] = 2
 end
 
-uₙ = ones(nₓ) #initialize our placeholder array un, to hold the time-stepped solution
+uₙ = similar(u) #initialize our placeholder array un, to hold the time-stepped solution
 
 # The code snippet below is *unfinished*. We have copied over the line from [Step 1](./01_Step_1.jl)
 # that executes the time-stepping update. Can you edit this code to execute the nonlinear convection instead?
 
 
 for n in nₜ  #iterate through time
-    uₙ = copy(u) ##copy the existing values of u into uₙ
+    copyto!(uₙ, u) ##copy the existing values of u into uₙ
     for i in 1:nₓ  ##now we'll iterate through the u array
     
      ###This is the line from Step 1, copied exactly.  Edit it for our new equation.

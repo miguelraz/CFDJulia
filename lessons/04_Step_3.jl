@@ -61,14 +61,14 @@ u = ones(nₓ)      #as before, we initialize u with every value equal to 1.
 indexes = Int.((.5/Δx):(1/Δx))
 u[indexes] .= 2 #then set u = 2 between 0.5 and 1 as per our I.C.s
 
-uₙ = ones(nₓ) #initialize our placeholder array un, to hold the time-stepped solution
+uₙ = similar(u) #initialize our placeholder array un, to hold the time-stepped solution
 
-u = numpy.ones(nx)      #a numpy array with nx elements all equal to 1.
-u[int(.5 / dx):int(1 / dx + 1)] = 2  #setting u = 2 between 0.5 and 1 as per our I.C.s
+u = ones(nx)      #a numpy array with nx elements all equal to 1.
+u[Int(.5 / dx):Int(1 / dx + 1)] = 2  #setting u = 2 between 0.5 and 1 as per our I.C.s
 
 
 for n in nₜ  #iterate through time
-    uₙ = copy(u) ##copy the existing values of u into uₙ
+    copyto!(uₙ, u) ##copy the existing values of u into un
     for i in 1:nₓ  ##now we'll iterate through the u array
 
      ###This is the line from Step 1, copied exactly.  Edit it for our new equation.
